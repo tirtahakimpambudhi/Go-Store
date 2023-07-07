@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://tirtahakimpambudhi.github.io/Go-Store",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -12,11 +13,14 @@
     "preview": "vite preview",
     "test": "vitest",
     "test:ui": "vitest --ui .",
-    "test:cov": "vitest run --coverage"
+    "test:cov": "vitest run --coverage",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@heroicons/react": "^2.1.5",
+    "gh-pages": "^6.1.1",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -31,6 +35,7 @@
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
@@ -48,9 +53,11 @@
     "globals": "^15.9.0",
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.8",
     "react-test-renderer": "^18.3.1",
     "tailwindcss": "^3.4.12",
     "vite": "^5.4.1",
+    "vite-plugin-svgr": "^4.2.0",
     "vitest": "^2.1.1"
   }
 }
