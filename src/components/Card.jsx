@@ -2,12 +2,12 @@ import PropTypes from "prop-types";
 
 function Card({ name, imageSrc, imageAlt, href, description, categories }) {
   return (
-    <div className="group relative w-full h-full flex flex-col">
+    <div className="group relative flex h-full w-full flex-col">
       <div className="relative h-3/4 w-full overflow-hidden rounded-lg bg-base-content group-hover:opacity-75">
         <img
           alt={imageAlt}
           src={imageSrc}
-          className="h-full w-full object-cover object-center"
+          className="h-full w-full border-2 border-base-content object-cover object-center"
         />
       </div>
       <div className="p-4">
@@ -17,12 +17,12 @@ function Card({ name, imageSrc, imageAlt, href, description, categories }) {
             {name}
           </a>
         </h3>
-        <p className="text-base font-semibold text-base-neutral">
+        <p className="text-base-neutral text-base font-semibold">
           {description}
         </p>
       </div>
       {categories.length > 0 && (
-        <div className="flex space-x-2 ml-auto p-2">
+        <div className="ml-auto flex space-x-2 p-2">
           {categories.map((category, index) => (
             <div key={index} className="badge badge-outline">
               {category}
