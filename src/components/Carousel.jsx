@@ -1,104 +1,41 @@
+import PropTypes from "prop-types";
+
 import Card from "./Card.jsx";
 
-const dummyDatas = [
-  {
-    name: "Desk and Office",
-    description: "Work from home accessories",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg",
-    imageAlt:
-      "Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.",
-    href: "#",
-    categories: ["Work", "Office", "Coffee"],
-  },
-  {
-    name: "Self-Improvement",
-    description: "Journals and note-taking",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-02-edition-02.jpg",
-    imageAlt:
-      "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.",
-    href: "#",
-    categories: ["Personal Development", "Mental Health"],
-  },
-  {
-    name: "Travel",
-    description: "Daily commute essentials",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg",
-    imageAlt: "Collection of four insulated travel bottles on wooden shelf.",
-    href: "#",
-  },
-  {
-    name: "Desk and Office",
-    description: "Work from home accessories",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg",
-    imageAlt:
-      "Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.",
-    href: "#",
-  },
-  {
-    name: "Self-Improvement",
-    description: "Journals and note-taking",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-02-edition-02.jpg",
-    imageAlt:
-      "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.",
-    href: "#",
-  },
-  {
-    name: "Travel",
-    description: "Daily commute essentials",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg",
-    imageAlt: "Collection of four insulated travel bottles on wooden shelf.",
-    href: "#",
-  },
-  {
-    name: "Desk and Office",
-    description: "Work from home accessories",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg",
-    imageAlt:
-      "Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.",
-    href: "#",
-  },
-  {
-    name: "Self-Improvement",
-    description: "Journals and note-taking",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-02-edition-02.jpg",
-    imageAlt:
-      "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.",
-    href: "#",
-  },
-  {
-    name: "Travel",
-    description: "Daily commute essentials",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg",
-    imageAlt: "Collection of four insulated travel bottles on wooden shelf.",
-    href: "#",
-  },
-];
-
-export default function Carousel() {
+/**
+ * For Carousel Component
+ * @param products list products
+ * @returns {JSX.Element} return carousel component
+ * @constructor
+ */
+export default function Carousel({ products }) {
   return (
-    <div className="carousel carousel-center bg-base-100 rounded-box w-full space-x-4 p-4 box-border">
-      {dummyDatas.map((data, index) => (
-        <div key={index} className="carousel-item bg-transparent w-96 h-96">
+    <div className="carousel carousel-center box-border w-full space-x-4 rounded-box bg-base-100 p-4">
+      {products?.map((data, index) => (
+        <div key={index} className="carousel-item h-96 w-96 bg-transparent">
           <Card
-            className="w-full h-full"
+            className="h-full w-full"
             name={data.name}
             description={data.description}
             href={data.href}
-            imageSrc={data.imageSrc}
-            imageAlt={data.imageAlt}
-            categories={!data.categories ? [] : data.categories}
-          ></Card>
+            imageSrc={data.img}
+            imageAlt={data.name}
+            categories={data.categories ?? []}
+          />
         </div>
       ))}
     </div>
   );
 }
+
+Carousel.propTypes = {
+  products: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      href: PropTypes.string.isRequired,
+      img: PropTypes.string.isRequired,
+      categories: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    }).isRequired
+  ).isRequired,
+};
