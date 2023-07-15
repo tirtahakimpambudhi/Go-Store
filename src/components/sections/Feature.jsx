@@ -1,5 +1,6 @@
-import { features as defaultFeatures } from "../../constant/features.jsx";
 import PropTypes from "prop-types";
+
+import { features as defaultFeatures } from "../../constant/features.jsx";
 import { getArrayOrDefault } from "../../utils/array.js";
 
 /**
@@ -20,15 +21,13 @@ export default function Feature({ features }) {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-base font-semibold leading-7 text-indigo-600">
-            Deploy faster
+            Our Services
           </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-base-content sm:text-4xl">
-            Everything you need to deploy your app
+            Everything you need is right here
           </p>
           <p className="mt-6 text-lg leading-8 text-base-content">
-            Quis tellus eget adipiscing convallis sit sit eget aliquet quis.
-            Suspendisse eget egestas a elementum pulvinar et feugiat blandit at.
-            In mi viverra elit nunc.
+            Why should you create a website at Go Store?
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
