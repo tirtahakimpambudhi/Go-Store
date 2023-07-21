@@ -1,4 +1,4 @@
-import { FaFacebook, FaWhatsapp, FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaFacebook, FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 
 const socialMedias = [
   {
@@ -35,7 +35,7 @@ const socialMedias = [
   },
 ];
 
-const services = ["Branding", "Design", "Marketing", "Advertisement"];
+const services = ["Website", "Design", "Hosting", "API"];
 const companies = [
   {
     name: "About Us",
@@ -43,10 +43,6 @@ const companies = [
   },
   {
     name: "Contact",
-    href: "#",
-  },
-  {
-    name: "Jobs",
     href: "#",
   },
 ];
