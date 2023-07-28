@@ -1,8 +1,8 @@
-import { describe, it,  expect, afterEach } from "vitest";
-import { render, cleanup } from "@testing-library/react";
 import { faker } from "@faker-js/faker";
-import Brand from "../../src/components/Brand.jsx";
+import { cleanup, render } from "@testing-library/react";
+import { afterEach, describe, expect, it } from "vitest";
 
+import Brand from "../../src/components/Brand.jsx";
 
 describe("Unit Testing Component Brand", () => {
   afterEach(cleanup);
@@ -12,7 +12,7 @@ describe("Unit Testing Component Brand", () => {
   };
 
   const assertImg = (imgSrc) => {
-    const brand = document.body.querySelector(`img[src=${imgSrc}]`);
+    const brand = document.body.querySelector(`img[src="${imgSrc}"]`);
     expect(brand).toBeInTheDocument();
     expect(imgSrc).toEqual(brand.getAttribute("src"));
     expect("Go Store Logo").toEqual(brand.getAttribute("alt"));
@@ -28,4 +28,4 @@ describe("Unit Testing Component Brand", () => {
     renderBrand("");
     assertImg("");
   });
-})
+});
