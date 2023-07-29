@@ -1,9 +1,10 @@
 import { faker } from "@faker-js/faker";
-import { describe, it, expect, beforeEach } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
+
 import Card from "../../src/components/Card.jsx";
 
-describe("Testing Component Card", () => {
+describe("Unit Testing Component Card", () => {
   let card, categories;
 
   beforeEach(() => {
@@ -21,6 +22,8 @@ describe("Testing Component Card", () => {
       categories,
     };
   });
+
+  afterEach(cleanup);
 
   /**
    * For render card component
