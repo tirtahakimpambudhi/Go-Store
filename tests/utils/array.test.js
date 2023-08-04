@@ -1,4 +1,5 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
+
 import { getArrayOrDefault } from "../../src/utils/array.js";
 
 describe("Testing Function Utils getArrayOrDefault", () => {
