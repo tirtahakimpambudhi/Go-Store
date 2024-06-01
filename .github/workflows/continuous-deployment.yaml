@@ -58,7 +58,7 @@ jobs:
           REPO_NAME="${{ github.repository }}"
           DEPLOY_URL="$DEPLOYMENT_URL"
           DESCRIPTION="Deployment URL Vercel: $DEPLOY_URL"
-          
+
           curl -X PATCH \
             -H "Authorization: Bearer $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
