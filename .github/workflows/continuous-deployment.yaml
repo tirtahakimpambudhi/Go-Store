@@ -1,17 +1,13 @@
 name: Node.js Continuous Delivery
 
 on:
-  pull_request:
+  push:
     branches:
       - master
-    types:
-      - closed
-permissions:
-  contents: write
+
 
 jobs:
   Deploy-Jobs:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     strategy:
       matrix:
