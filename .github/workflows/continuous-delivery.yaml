@@ -1,0 +1,27 @@
+name: Node.js Continuous Delivery
+
+on:
+  push:
+    branches:
+      - test
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22.x, 21.x, 20.x]
+
+    steps:
+      - uses: actions/checkout@v2
+        name: "Checkout repository"
+
+      - uses: actions/setup-node@v4
+        name: "Use Node.js ${{ matrix.node-version }}"
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: "Install Dependencies"
+        run: npm i
+
+
