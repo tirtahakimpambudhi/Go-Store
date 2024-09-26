@@ -10,7 +10,9 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "test:ui": "vitest --ui .",
+    "test:cov": "vitest run --coverage"
   },
   "dependencies": {
     "@fortawesome/react-fontawesome": "^0.2.2",
@@ -32,6 +34,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "@vitest/coverage-v8": "^2.1.1",
     "@vitest/ui": "^2.1.1",
     "autoprefixer": "^10.4.20",
     "daisyui": "^4.12.10",

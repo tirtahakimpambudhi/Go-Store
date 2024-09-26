@@ -15,6 +15,10 @@ export default defineConfig(({ _, mode }) => {
     test: {
       environment: "jsdom",
       setupFiles: "./tests/setupTests.js",
+      coverage: {
+        provider: "v8",
+        reporter: ["text", "json", "html"],
+      },
     },
     define: {
       ...Object.keys(env).reduce((prev, key) => {
