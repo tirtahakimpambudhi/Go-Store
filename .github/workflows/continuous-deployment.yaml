@@ -3,7 +3,7 @@ name: Node.js Continuous Delivery
 on:
   push:
     branches:
-      - test
+      - master
 
 jobs:
   Delivery-Jobs:
