@@ -27,14 +27,9 @@ jobs:
       - name: "Install Vercel CLI"
         run: npm i -g vercel
 
-      - name: "Checking Token"
+      - name: "Setup ENV"
         run: |
-          if [ -z "$VERCEL_TOKEN" ]; then
-             echo "Error: Secret VERCEL_TOKEN is not set or is empty."
-             exit 1
-          fi
+          echo "VERCEL_TOKEN=${{ secrets.VERCEL_TOKEN }}" >> $GITHUB_ENV
       - name: "Deploy in Vercel"
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        run: echo "Token" "$VERCEL_TOKEN"
+        run: vercel --preview
 
