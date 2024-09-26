@@ -7,38 +7,37 @@ on:
 
 jobs:
   Delivery-Jobs:
-    build:
-      runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          node-version: [ 22.x, 21.x, 20.x ]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22.x, 21.x, 20.x]
 
-      steps:
-        - uses: actions/checkout@v2
-          name: "Checkout repository"
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v2
 
-        - uses: actions/setup-node@v4
-          name: "Use Node.js ${{ matrix.node-version }}"
-          with:
-            node-version: ${{ matrix.node-version }}
+      - name: "Set up Node.js ${{ matrix.node-version }}"
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
 
-        - name: "Install Dependencies"
-          run: npm i
+      - name: "Install Dependencies"
+        run: npm install
 
-        - name: "Install Vercel CLI"
-          run: npm i -g vercel
+      - name: "Install Vercel CLI"
+        run: npm install -g vercel
 
-        - name: "Setup ENV"
-          run: |
-            echo "VERCEL_TOKEN=${{ secrets.VERCEL_TOKEN }}" >> $GITHUB_ENV
-            echo "VERCEL_PROJECT_ID=${{ secrets.VERCEL_PROJECT_ID }}" >> $GITHUB_ENV
-            echo "VERCEL_ORG_ID=${{ secrets.VERCEL_ORG_ID }}" >> $GITHUB_ENV
-        - name: Pull Vercel Environment Information
-          run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      - name: "Set up Environment Variables"
+        run: |
+          echo "VERCEL_TOKEN=${{ secrets.VERCEL_TOKEN }}" >> $GITHUB_ENV
+          echo "VERCEL_PROJECT_ID=${{ secrets.VERCEL_PROJECT_ID }}" >> $GITHUB_ENV
+          echo "VERCEL_ORG_ID=${{ secrets.VERCEL_ORG_ID }}" >> $GITHUB_ENV
 
-        - name: Build Project Artifacts
-          run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+      - name: "Pull Vercel Environment Information"
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
 
-        - name: Deploy Project Artifacts
-          run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+      - name: "Build Project Artifacts"
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
 
+      - name: "Deploy Project Artifacts"
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
