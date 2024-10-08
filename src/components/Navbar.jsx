@@ -1,5 +1,6 @@
-import ModeButton from "./ModeButton.jsx";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+
+import ModeButton from "./ModeButton.jsx";
 
 export default function Navigation() {
   return (

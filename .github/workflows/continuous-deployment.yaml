@@ -1,12 +1,17 @@
 name: Node.js Continuous Delivery
 
 on:
-  push:
+  pull_request:
     branches:
       - master
+    types:
+      - closed
+permissions:
+  contents: write
 
 jobs:
-  Delivery-Jobs:
+  Deploy-Jobs:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -32,12 +37,30 @@ jobs:
           echo "VERCEL_TOKEN=${{ secrets.VERCEL_TOKEN }}" >> $GITHUB_ENV
           echo "VERCEL_PROJECT_ID=${{ secrets.VERCEL_PROJECT_ID }}" >> $GITHUB_ENV
           echo "VERCEL_ORG_ID=${{ secrets.VERCEL_ORG_ID }}" >> $GITHUB_ENV
+          echo "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
 
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Build Project Artifacts
+      - name: Build Project in Vercel
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Deploy Project Artifacts
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project in Vercel
+        run: |
+          # Capture the deployment URL in a file
+          vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} > deployment-url.txt
+          # Read the URL and store it in a GitHub environment variable
+          DEPLOYMENT_URL=$(cat deployment-url.txt)
+          echo "DEPLOYMENT_URL=${DEPLOYMENT_URL}" >> $GITHUB_ENV
+          rm deployment-url.txt
+      - name: Update GitHub repository description with Vercel URL
+        run: |
+          REPO_NAME="${{ github.repository }}"
+          DEPLOY_URL="$DEPLOYMENT_URL"
+          DESCRIPTION="Deployment URL Vercel: $DEPLOY_URL"
+          
+          curl -X PATCH \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            -d "{\"description\": \"$DESCRIPTION\"}" \
+            "https://api.github.com/repos/$REPO_NAME"
