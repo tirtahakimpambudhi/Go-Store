@@ -17,7 +17,7 @@ export default function Contact({ companyInfo }) {
     companyInfo = [];
   }
   return (
-    <section className="py-24">
+    <section id="contact" className="py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-x-24 lg:grid-cols-2">
           <div className="mb-10 flex items-center lg:mb-0">

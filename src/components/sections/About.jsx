@@ -23,7 +23,10 @@ export default function About({ stats, links }) {
     links = !(links instanceof Error) ? links : [];
   }
   return (
-    <div className="relative isolate overflow-hidden bg-base-100 py-24 sm:py-32">
+    <div
+      id="about"
+      className="relative isolate overflow-hidden bg-base-100 py-24 sm:py-32"
+    >
       <div
         aria-hidden="true"
         className="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl"
