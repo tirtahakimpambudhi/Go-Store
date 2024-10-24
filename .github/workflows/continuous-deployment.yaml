@@ -9,7 +9,6 @@ permissions:
   contents: write
   repository-projects: write
 
-
 jobs:
   Deploy-Jobs:
     runs-on: ubuntu-latest
@@ -59,7 +58,7 @@ jobs:
           # Escape special characters in the deployment URL
           DEPLOY_URL=$(echo "$DEPLOYMENT_URL" | sed 's/[\/&]/\\&/g')
           DESCRIPTION="Deployment URL Vercel: ${DEPLOY_URL}"
-          
+
           curl -L \
             -X PATCH \
             -H "Accept: application/vnd.github+json" \
