@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
-import { getArrayOrDefault } from "../../utils/array.js";
+
 import {
-  stats as defaultStats,
   links as defaultLinks,
+  stats as defaultStats,
 } from "../../constant/abouts.js";
+import { getArrayOrDefault } from "../../utils/array.js";
 
 /**
  * For About Us Component in Landing Page
@@ -53,9 +54,12 @@ export default function About({ stats, links }) {
             About Us
           </h2>
           <p className="mt-6 text-lg leading-8 text-base-content">
-            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-            lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-            fugiat aliqua.
+            We specialize in creating custom websites that elevate your online
+            presence. Established in 2024, our skilled team combines creativity
+            and technical expertise to deliver user-friendly, responsive designs
+            tailored to your business needs. Committed to client satisfaction,
+            we provide ongoing support to help you succeed online. Let’s work
+            together to bring your vision to life!
           </p>
         </div>
         <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">

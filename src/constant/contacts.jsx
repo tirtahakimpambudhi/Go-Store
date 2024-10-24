@@ -7,7 +7,7 @@ export const companyInfo = [
     icon: (
       <a
         className="text-center text-2xl"
-        href="https://wa.me/6283876290280"
+        href="https://wa.me/6283125342470"
         target="_blank"
       >
         <FaWhatsapp></FaWhatsapp>
@@ -15,11 +15,11 @@ export const companyInfo = [
     ),
   },
   {
-    title: "examplecompany@gmail.com",
+    title: "tirtanewwhakim22@gmail.com",
     icon: (
       <a
         className="text-center text-2xl"
-        href="mailto:examplecompany@gmail.com"
+        href="mailto:tirtanewwhakim22@gmail.com"
         target="_blank"
       >
         <MdOutlineAlternateEmail></MdOutlineAlternateEmail>
@@ -27,7 +27,7 @@ export const companyInfo = [
     ),
   },
   {
-    title: "USA, New York",
+    title: "Indonesia, Yogyakarta",
     icon: (
       <a
         className="text-center text-2xl"

@@ -1,5 +1,6 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import { describe, it, expect, beforeEach } from "vitest";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
+
 import ModeButton from "../../src/components/ModeButton";
 
 describe("Testing Component ModeButton", () => {
@@ -9,6 +10,7 @@ describe("Testing Component ModeButton", () => {
     document.documentElement.setAttribute("data-theme", "");
   });
 
+  afterEach(cleanup);
   /**
    * For render mode (dark,light) button
    */

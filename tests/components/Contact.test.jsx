@@ -1,9 +1,11 @@
-import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it } from "vitest";
+
 import Contact from "../../src/components/sections/Contact.jsx";
 import { companyInfo as companyInfos } from "../../src/constant/contacts.jsx";
 
 describe("Testing Component Contact", () => {
+  afterEach(cleanup);
   /**
    * For render contact component
    * @param companyInfo {Array.<{title : String,icon : String}>} use for setting value company info in contact

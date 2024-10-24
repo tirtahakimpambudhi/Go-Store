@@ -1,21 +1,25 @@
-import ModeButton from "./ModeButton.jsx";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import PropTypes from "prop-types";
 
-export default function Navigation() {
+/**
+ *  For Navigation Bar Component
+ * @param brand {Element} use for brand or logo in navbar
+ * @param navigations {Array.<{name: String, href: String}>} use for navigation link in navbar
+ * @param sideNavigations {Array.<Element>} use for side navigation link in navbar
+ * @returns {JSX.Element} return Navbar Component
+ * @constructor
+ */
+export default function Navbar({ brand, navigations, sideNavigations }) {
   return (
-    <div
-      className="drawer bg-base-100 text-base-content sticky top-0 z-30 bg-opacity-90 backdrop-blur transition-shadow duration-100 [transform:translate3d(0,0,0)]
-  shadow-sm"
-    >
+    <div className="drawer sticky top-0 z-30 bg-base-100 bg-opacity-90 text-base-content shadow-sm backdrop-blur transition-shadow duration-100 [transform:translate3d(0,0,0)]">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col ">
+      <div className="drawer-content flex flex-col">
         {/* Navbar */}
         <div className="navbar w-full">
           <div className="flex-none lg:hidden">
             <label
               htmlFor="my-drawer-3"
               aria-label="open sidebar"
-              className="btn btn-ghost btn-circle swap swap-rotate"
+              className="btn btn-circle btn-ghost swap swap-rotate"
             >
               {/* this hidden checkbox controls the state */}
               <input type="checkbox" />
@@ -43,35 +47,21 @@ export default function Navigation() {
               </svg>
             </label>
           </div>
-          <div className="mx-2 flex-1 px-2">Navbar Title</div>
+          <div className="brand mx-2 flex-1 px-2">
+            <div className="brand hidden p-4 lg:block">{brand}</div>
+          </div>
           <div className="hidden flex-none lg:block">
             <ul className="menu menu-horizontal space-x-4">
               {/* Navbar menu content here */}
-              <li>
-                <a>Navbar Item 1</a>
-              </li>
-              <li>
-                <a>Navbar Item 2</a>
-              </li>
+              {navigations?.map((nav, index) => (
+                <li key={index}>
+                  <a href={nav.href}>{nav.name}</a>
+                </li>
+              ))}
             </ul>
           </div>
           <div className="menu menu-horizontal space-x-2">
-            <a
-              className="text-center text-2xl"
-              href="https://github.com/tirtahakimpambudhi"
-              target="_blank"
-            >
-              <FaGithub></FaGithub>
-            </a>
-            <a
-              className="text-center text-2xl"
-              href="https://id.linkedin.com/"
-              target="_blank"
-            >
-              <FaLinkedin></FaLinkedin>
-            </a>
-
-            <ModeButton></ModeButton>
+            {sideNavigations?.map((nav) => nav)}
           </div>
         </div>
         {/* Page content here */}
@@ -82,16 +72,27 @@ export default function Navigation() {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu bg-base-200 min-h-full w-80 p-4">
+        <ul className="menu min-h-full w-80 bg-base-200 p-4">
           {/* Sidebar content here */}
-          <li>
-            <a>Sidebar Item 1</a>
-          </li>
-          <li>
-            <a>Sidebar Item 2</a>
-          </li>
+          <div className="brand mb-2 p-2 lg:hidden">{brand}</div>
+          {navigations?.map((nav, index) => (
+            <li key={index}>
+              <a href={nav.href}>{nav.name}</a>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
   );
 }
+
+Navbar.propTypes = {
+  brand: PropTypes.element.isRequired,
+  navigations: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      href: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
+  sideNavigations: PropTypes.arrayOf(PropTypes.element.isRequired).isRequired,
+};

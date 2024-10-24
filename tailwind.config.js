@@ -1,6 +1,6 @@
-import daisyUI from "daisyui";
-import typography from "@tailwindcss/typography";
 import aspectRatio from "@tailwindcss/aspect-ratio";
+import typography from "@tailwindcss/typography";
+import daisyUI from "daisyui";
 
 /** @type {import('tailwindcss').Config} */
 export default {
