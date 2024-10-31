@@ -13,13 +13,13 @@ import { navigations, sideNavigations } from "../constant/navbar.jsx";
 
 export default function Home() {
   const navProps = {
-    Brand: <Brand imgSrc={"/images/go-store-logo.png"} />,
+    Brand: <Brand imgSrc={"/Go-Store/images/go-store-logo.png"} />,
     navigations: navigations,
     sideNavigations: sideNavigations,
   };
   return (
     <div className="container-fluid">
-      <Hero imageSrc={"/images/hero-1.jpg"} navProps={navProps}></Hero>
+      <Hero imageSrc={"/Go-Store/images/hero-1.jpg"} navProps={navProps}></Hero>
       <Feature features={features}></Feature>
       <About stats={stats} links={links}></About>
       <Content></Content>
