@@ -1,43 +1,42 @@
 name: Node.js Continuous Delivery
 
 on:
-  pull_request:
+  push:
     branches:
       - master
-    types:
-      - closed
+
 permissions:
   contents: write
+  repository-projects: write
 
 jobs:
   Deploy-Jobs:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [22.x, 21.x, 20.x]
 
     steps:
-      - name: "Checkout repository"
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: "Set up Node.js ${{ matrix.node-version }}"
+      - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: "Install Dependencies"
-        run: npm install
+      - name: Install Dependencies
+        run: npm install --production
 
-      - name: "Install Vercel CLI"
+      - name: Install Vercel CLI
         run: npm install -g vercel
 
-      - name: "Set up Environment Variables"
+      - name: Set up Environment Variables
         run: |
           echo "VERCEL_TOKEN=${{ secrets.VERCEL_TOKEN }}" >> $GITHUB_ENV
           echo "VERCEL_PROJECT_ID=${{ secrets.VERCEL_PROJECT_ID }}" >> $GITHUB_ENV
           echo "VERCEL_ORG_ID=${{ secrets.VERCEL_ORG_ID }}" >> $GITHUB_ENV
-          echo "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+          echo "GH_TOKEN=${{ secrets.GH_TOKEN }}" >> $GITHUB_ENV
 
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
@@ -53,14 +52,22 @@ jobs:
           DEPLOYMENT_URL=$(cat deployment-url.txt)
           echo "DEPLOYMENT_URL=${DEPLOYMENT_URL}" >> $GITHUB_ENV
           rm deployment-url.txt
+
       - name: Update GitHub repository description with Vercel URL
         run: |
-          REPO_NAME="${{ github.repository }}"
-          DEPLOY_URL="$DEPLOYMENT_URL"
-          DESCRIPTION="Deployment URL Vercel: $DEPLOY_URL"
+          # Escape special characters in the deployment URL
+          DEPLOY_URL=$(echo "$DEPLOYMENT_URL" | sed 's/[\/&]/\\&/g')
+          DESCRIPTION="Deployment URL Vercel: ${DEPLOY_URL}"
 
-          curl -X PATCH \
-            -H "Authorization: Bearer $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            -d "{\"description\": \"$DESCRIPTION\"}" \
-            "https://api.github.com/repos/$REPO_NAME"
+          curl -L \
+            -X PATCH \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${REPO_NAME}" \
+            -d "{\"description\":\"${DESCRIPTION}\"}"
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
