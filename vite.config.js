@@ -42,7 +42,7 @@ import svgr from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/Go-Store/",
+  base: "Go-Store",
   plugins: [
     react(),
     svgr({
